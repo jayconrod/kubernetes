@@ -7,6 +7,11 @@ http_archive(
     urls = mirror("https://github.com/bazelbuild/rules_go/releases/download/0.15.3/rules_go-0.15.3.tar.gz"),
 )
 
+local_repository(
+    name = "bazel_gazelle",
+    path = "/usr/local/google/home/jayconrod/go/src/github.com/bazelbuild/bazel-gazelle",
+)
+
 http_archive(
     name = "io_kubernetes_build",
     sha256 = "1188feb932cefad328b0a3dd75b3ebd1d79dd26dbdd723f019ceb760e27ba6d8",
@@ -50,6 +55,10 @@ go_rules_dependencies()
 go_register_toolchains(
     go_version = "1.10.4",
 )
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+gazelle_dependencies()
 
 docker_repositories()
 

@@ -14,6 +14,9 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@io_kubernetes_build//defs:build.bzl", "gcs_upload")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+gazelle(name = "gazelle")
 
 filegroup(
     name = "_binary-artifacts-and-hashes",

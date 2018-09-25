@@ -1,0 +1,46 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    tags = ["e2e"],
+)
+
+genrule(
+    name = "gen_e2e_node.test",
+    testonly = 1,
+    srcs = [":go_default_test"],
+    outs = ["e2e_node.test"],
+    cmd = "srcs=($(SRCS)); cp $$(dirname $${srcs[0]})/go_default_test $@;",
+    output_to_bindir = 1,
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//test/e2e_node/builder:all-srcs",
+        "//test/e2e_node/environment:all-srcs",
+        "//test/e2e_node/perf/workloads:all-srcs",
+        "//test/e2e_node/perftype:all-srcs",
+        "//test/e2e_node/remote:all-srcs",
+        "//test/e2e_node/runner/local:all-srcs",
+        "//test/e2e_node/runner/remote:all-srcs",
+        "//test/e2e_node/services:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,32 @@
+load(
+    "@io_bazel_rules_go//go:def.bzl",
+    "go_library",
+    "go_test",
+)
+
+go_library(
+    name = "go_default_library",
+    visibility = [
+        "//build/visible_to:pkg_kubectl_cmd_util_editor_CONSUMERS",
+    ],
+)
+
+go_test(name = "go_default_test")
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//pkg/kubectl/cmd/util/editor/crlf:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = [
+        "//build/visible_to:pkg_kubectl_cmd_util_editor_CONSUMERS",
+    ],
+)

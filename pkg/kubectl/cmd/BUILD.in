@@ -1,0 +1,51 @@
+load(
+    "@io_bazel_rules_go//go:def.bzl",
+    "go_library",
+    "go_test",
+)
+
+go_library(
+    name = "go_default_library",
+    visibility = [
+        "//build/visible_to:pkg_kubectl_cmd_CONSUMERS",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    data = [
+        "testdata",
+        "//api/openapi-spec:swagger-spec",
+        "//test/e2e/testing-manifests:all-srcs",
+        "//test/fixtures",
+    ],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//pkg/kubectl/cmd/auth:all-srcs",
+        "//pkg/kubectl/cmd/config:all-srcs",
+        "//pkg/kubectl/cmd/create:all-srcs",
+        "//pkg/kubectl/cmd/get:all-srcs",
+        "//pkg/kubectl/cmd/rollout:all-srcs",
+        "//pkg/kubectl/cmd/scalejob:all-srcs",
+        "//pkg/kubectl/cmd/set:all-srcs",
+        "//pkg/kubectl/cmd/templates:all-srcs",
+        "//pkg/kubectl/cmd/testdata/edit:all-srcs",
+        "//pkg/kubectl/cmd/testing:all-srcs",
+        "//pkg/kubectl/cmd/util:all-srcs",
+        "//pkg/kubectl/cmd/wait:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = [
+        "//build/visible_to:pkg_kubectl_cmd_CONSUMERS",
+    ],
+)

@@ -127,3 +127,4 @@ zz_generated_*_test.go
 
 /bazel-*
 *.pyc
+BUILD

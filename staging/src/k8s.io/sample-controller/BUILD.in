@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "sample-controller",
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//staging/src/k8s.io/sample-controller/pkg/apis/samplecontroller:all-srcs",
+        "//staging/src/k8s.io/sample-controller/pkg/client/clientset/versioned:all-srcs",
+        "//staging/src/k8s.io/sample-controller/pkg/client/informers/externalversions:all-srcs",
+        "//staging/src/k8s.io/sample-controller/pkg/client/listers/samplecontroller/v1alpha1:all-srcs",
+        "//staging/src/k8s.io/sample-controller/pkg/signals:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(name = "go_default_test")

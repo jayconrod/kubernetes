@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//vendor/github.com/coreos/etcd/etcdserver/api:all-srcs",
+        "//vendor/github.com/coreos/etcd/etcdserver/auth:all-srcs",
+        "//vendor/github.com/coreos/etcd/etcdserver/etcdserverpb:all-srcs",
+        "//vendor/github.com/coreos/etcd/etcdserver/membership:all-srcs",
+        "//vendor/github.com/coreos/etcd/etcdserver/stats:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

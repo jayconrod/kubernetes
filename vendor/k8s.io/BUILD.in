@@ -1,0 +1,17 @@
+# gazelle:follow api
+# gazelle:follow apiextensions-apiserver
+# gazelle:follow apimachinery
+# gazelle:follow apiserver
+# gazelle:follow client-go
+# gazelle:follow cli-runtime
+# gazelle:follow code-generator
+# gazelle:follow csi-api
+# gazelle:follow kube-aggregator
+# gazelle:follow kube-controller-manager
+# gazelle:follow kubelet
+# gazelle:follow kube-proxy
+# gazelle:follow kube-scheduler
+# gazelle:follow metrics
+# gazelle:follow sample-apiserver
+# gazelle:follow sample-cli-plugin
+# gazelle:follow sample-controller

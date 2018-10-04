@@ -8,6 +8,7 @@ load("//build:openapi.bzl", "openapi_go_prefix", "openapi_vendor_prefix")
 
 openapi_library(
     name = "go_default_library",
+    srcs = ["doc.go"],
     go_prefix = openapi_go_prefix,
     openapi_targets = [
         "cmd/cloud-controller-manager/app/apis/config/v1alpha1",

@@ -7,9 +7,10 @@ http_archive(
     urls = mirror("https://github.com/bazelbuild/rules_go/releases/download/0.15.3/rules_go-0.15.3.tar.gz"),
 )
 
-local_repository(
+git_repository(
     name = "bazel_gazelle",
-    path = "/usr/local/google/home/jayconrod/go/src/github.com/bazelbuild/bazel-gazelle",
+    remote = "https://github.com/bazelbuild/bazel-gazelle",
+    commit = "6a486df7c5ac90110cfa6fbff4443c5f2513d0ce",
 )
 
 http_archive(
